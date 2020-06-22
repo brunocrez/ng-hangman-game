@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="hangman">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Hangman</title>
+</head>
+<body>
+    <div class="container" ng-controller="hangmanController">
+        <h2>{{title}}</h2>
+
+    </div>
+
+    <script src="lib/angular.js"></script>
+    <script>
+        angular.module("hangman", []);
+        angular.module("hangman").controller("hangmanController", function($scope) {
+            $scope.title = "Hangman Game"
+        });
+    </script>
+
+</body>
+</html>
