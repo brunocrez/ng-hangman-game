@@ -8,7 +8,11 @@
 </head>
 <body>
     <div class="container" ng-controller="hangmanController">
-        <h2>{{title}}</h2>
+        <div>Guesses Left: {{chances}}</div>
+        <div>Incorrect Guesses: <span ng-repeat="item in incorretLetters">{{item}} </span></div>
+        <div>Selected Word: {{displayWord}}</div>
+        <input type="text" id="inputShot" ng-model="shot.letter">        
+        <button type="button" ng-click="tryToGuess(shot)">Give a Shot</button>
 
     </div>
 
@@ -16,7 +20,41 @@
     <script>
         angular.module("hangman", []);
         angular.module("hangman").controller("hangmanController", function($scope) {
-            $scope.title = "Hangman Game"
+            $scope.chances = 6;
+            $scope.incorretLetters = [];
+            $scope.correctLetters = [];
+            $scope.displayWord = '';
+            $scope.shot = { letter: '' };
+
+            var word = 'bundas';
+            var wordLetter = [...word];
+
+            $scope.tryToGuess = function (e) {
+
+                if ($scope.correctLetters.includes(e.letter)) {
+                    $scope.shot.letter = '';
+                    document.getElementById('inputShot').focus();                    
+                    return;
+                }
+
+                if (!word.includes(e.letter)) {
+                    $scope.incorretLetters.push(e.letter);
+                    $scope.chances--;
+                } else {
+                    $scope.correctLetters.push(e.letter);
+
+                    
+                }
+
+                console.log('correct ', $scope.correctLetters)
+                console.log('incorrect ', $scope.incorretLetters)
+                console.log('chances ', $scope.chances)
+                
+            };
+
+            for (var i=0; i<word.length; i++) {
+                $scope.displayWord += '*';
+            }
         });
     </script>
 
