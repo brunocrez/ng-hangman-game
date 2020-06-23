@@ -9,7 +9,7 @@
 <body>
     <div class="container" ng-controller="hangmanController">
         <div>Guesses Left: {{chances}}</div>
-        <div>Incorrect Guesses: <span ng-repeat="item in incorretLetters">{{item}} </span></div>
+        <div>Incorrect Guesses: <span ng-repeat="item in incorrectLetters">{{item}} </span></div>
         <div>Selected Word: {{displayWord}}</div>
         <input type="text" id="inputShot" ng-model="shot.letter">        
         <button type="button" ng-click="tryToGuess(shot)">Give a Shot</button>
@@ -21,40 +21,74 @@
         angular.module("hangman", []);
         angular.module("hangman").controller("hangmanController", function($scope) {
             $scope.chances = 6;
-            $scope.incorretLetters = [];
+            $scope.incorrectLetters = [];
             $scope.correctLetters = [];
-            $scope.displayWord = '';
+            $scope.displayWord = [];
             $scope.shot = { letter: '' };
 
-            var word = 'bundas';
-            var wordLetter = [...word];
+            $scope.newGame = function() {                
+                $scope.chances = 6;
+                $scope.incorrectLetters = [];
+                $scope.correctLetters = [];
+                $scope.shot.letter = '';
+                document.getElementById('inputShot').focus();
+            };
+
+            var word = 'bundas';            
 
             $scope.tryToGuess = function (e) {
 
-                if ($scope.correctLetters.includes(e.letter)) {
+                if ($scope.incorrectLetters.length == word.length - 1) {
+                    alert('Game Over!');
+                    $scope.newGame();
+                }
+
+                const chosenLetter = e.letter.toLowerCase();
+
+                // already picked this letter
+
+                if ($scope.correctLetters.includes(chosenLetter)) {
+                    alert('You already picked this letter!');
                     $scope.shot.letter = '';
-                    document.getElementById('inputShot').focus();                    
+                    document.getElementById('inputShot').focus();
                     return;
                 }
 
-                if (!word.includes(e.letter)) {
-                    $scope.incorretLetters.push(e.letter);
-                    $scope.chances--;
-                } else {
-                    $scope.correctLetters.push(e.letter);
+                if ($scope.incorrectLetters.includes(chosenLetter)) {
+                    alert('You already picked this letter!');
+                    $scope.shot.letter = '';
+                    document.getElementById('inputShot').focus();
+                    return;
+                }
 
-                    
+                // given word has the chosen letter
+
+                if (word.includes(chosenLetter)) {
+                    $scope.correctLetters.push(chosenLetter);
+                    $scope.shot.letter = '';
+                    document.getElementById('inputShot').focus();
+                    //return;
+                } else {
+                    $scope.incorrectLetters.push(chosenLetter);
+                    $scope.chances--;
+                    $scope.shot.letter = '';
+                    document.getElementById('inputShot').focus();
+                    //return;
                 }
 
                 console.log('correct ', $scope.correctLetters)
-                console.log('incorrect ', $scope.incorretLetters)
+                console.log('incorrect ', $scope.incorrectLetters)
                 console.log('chances ', $scope.chances)
                 
+                for (var i = 0; i < word.length; i++) {
+                    if (chosenLetter == word[i]) {
+                        console.log(`${chosenLetter} in position ${i}`)
+                        $scope.displayWord[i] = chosenLetter
+                    }
+                }
             };
 
-            for (var i=0; i<word.length; i++) {
-                $scope.displayWord += '*';
-            }
+            $scope.displayWord = Array(word.length).fill('*');
         });
     </script>
 
