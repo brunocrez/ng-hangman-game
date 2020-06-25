@@ -1,4 +1,3 @@
-/* .container {
-    margin: 100px 250px;
-    text-align: center;
-} */
+@import './circle/circle.css';
+@import './input-button/input-button.css';
+@import './main-container/main-container.css';

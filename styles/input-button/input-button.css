@@ -1,0 +1,27 @@
+.input-button {
+    /* border: 1px solid black; */
+    padding: 10px;
+    border-radius: 20px;
+    width: 400px;
+    text-align: center;
+    margin: 10px auto;
+}
+
+input {
+    width: 100px;
+    line-height: 15px;
+    padding: 6px;
+    border-radius: 7px;
+    box-shadow: none;
+}
+
+button {
+    width: 100px;
+    line-height: 15px;
+    padding: 6px;
+    border-radius: 7px;
+    background-color: rgb(68, 71, 238);
+    font-weight: 500;
+    color: rgb(226, 226, 226);
+    border: none;
+}

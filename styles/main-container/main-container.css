@@ -1,0 +1,7 @@
+.main-container {
+    margin: 100px 220px;
+    text-align: center;
+    border: 1px solid rgb(122, 167, 250);
+    border-radius: 40px;
+    padding: 20px;
+}
