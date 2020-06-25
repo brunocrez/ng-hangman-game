@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="styles/main.css">
     <title>Hangman</title>
 </head>
 <body>
-    <div class="container" ng-controller="hangmanController">
+    <div class="jumbotron" ng-controller="hangmanController">
         <div>Guesses Left: {{chances}}</div>
         <div>Incorrect Guesses: <span ng-repeat="item in incorrectLetters">{{item}} </span></div>
         <div>Selected Word: {{displayWord}}</div>
-        <input type="text" id="inputShot" ng-model="shot.letter">        
-        <button type="button" ng-click="tryToGuess(shot)">Give a Shot</button>
+        <input class="form-control" id="inputShot" ng-model="shot.letter">        
+        <button type="button" class="btn btn-primary" ng-click="tryToGuess(shot)">Give a Shot</button>
 
     </div>
 
-    <script src="lib/angular.js"></script>
+    <script src="lib/angular/angular.js"></script>
     <script>
         angular.module("hangman", []);
         angular.module("hangman").controller("hangmanController", function($scope) {
