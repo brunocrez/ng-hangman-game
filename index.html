@@ -9,8 +9,8 @@
 <body>
     <div class="main-container" ng-controller="hangmanController">        
         <div class="circle">{{chances}}</div>
-        <div>Incorrect Guesses: <span ng-repeat="item in incorrectLetters">{{item}} </span></div>
-        <div class="selected-word">Word: {{displayWord}}</div>
+        <div class="text">Incorrect Guesses: <span ng-repeat="item in incorrectLetters">{{item}} </span></div>
+        <div class="text">Word: {{displayWord}}</div>
         <div class="input-button">
             <input id="inputShot" ng-model="shot.letter">              
             <button type="button" ng-click="tryToGuess(shot)">Give a Shot</button>
@@ -90,7 +90,7 @@
                 }
             };
 
-            $scope.displayWord = Array(word.length).fill('*');
+            $scope.displayWord = Array(word.length).fill('*').join(' ');
         });
     </script>
 
